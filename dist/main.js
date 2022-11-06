@@ -132,6 +132,10 @@ class SliderInterface {
 
   }
 
+  toggleReversed() {
+    return this.reversed = !this.reversed
+  }
+
   get reversed() {
     return this._reversed
   }
@@ -463,6 +467,10 @@ class CyclicSliderInterface {
     this.setCurrentSlot(this.targetComponent.firstElementChild)
     this.setCurrentPosition()
 
+  }
+
+  toggleReversed() {
+    return this.reversed = !this.reversed
   }
 
   get reversed() {
