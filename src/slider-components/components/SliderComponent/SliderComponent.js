@@ -23,6 +23,10 @@ class SliderInterface {
 
   }
 
+  toggleReversed() {
+    return this.reversed = !this.reversed
+  }
+
   get reversed() {
     return this._reversed
   }
