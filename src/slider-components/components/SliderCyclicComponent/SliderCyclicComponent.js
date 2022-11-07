@@ -15,7 +15,8 @@ class CyclicSliderInterface {
       _wrapperCSSRule: {value: rule},
       _storedTransitionDuration: {writable: true, value: undefined},
       _direction: {writable: true, value: 'horizontal'},
-      _reversed: {writable: true, value: false}
+      _reversed: {writable: true, value: false},
+      _isTransitioning: {writable: true, value: false}
     })
 
     this._direction = this.targetComponent.dataset.direction ?? this._direction
