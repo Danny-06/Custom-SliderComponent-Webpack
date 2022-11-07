@@ -15,12 +15,32 @@ class SliderInterface {
       _wrapperCSSRule: {value: rule},
       _storedTransitionDuration: {writable: true, value: undefined},
       _direction: {writable: true, value: 'horizontal'},
-      _reversed: {writable: true, value: false}
+      _reversed: {writable: true, value: false},
+      _cyclic: {writable: true, value: false},
+      _isTransitioning: {writable: true, value: false},
+      _currentSlottedElement: {writable: true, value: null},
+      _currentPlaceholderElement: {writable: true, value: null}
     })
 
     this._direction = this.targetComponent.dataset.direction ?? this._direction
     this.direction = this._direction
 
+  }
+
+  toggleCyclic() {
+    return this.cyclic = !this.cyclic
+  }
+
+  get cyclic() {
+    return this._cyclic
+  }
+
+  set cyclic(value) {
+    if (typeof value !== 'boolean') {
+      throw new TypeError(`value must be a boolean`)
+    }
+
+    this._cyclic = value
   }
 
   toggleReversed() {
@@ -122,6 +142,13 @@ class SliderInterface {
       throw new TypeError(`Value must be a number`)
     }
 
+    if (this._cyclic && this._isTransitioning) {
+      return
+    }
+
+    this._isTransitioning = true
+
+
     value = Math.floor(value)
 
     value %= this.length
@@ -132,18 +159,87 @@ class SliderInterface {
 
     if (value === this._currentIndex) return
 
+    if (this._cyclic) {
+      this.handleCyclicTransitionStart(value)
+    } else {
+      this.position = value
+    }
+
     this._currentIndex = value
-    this.position = value
 
     return new Promise(resolve => {
       if (!this.hasTransition) {
         resolve(value)
 
+        if (this._cyclic) {
+          this.handleCyclicTransitionEnd()
+        }
+
+        this._isTransitioning = false
         return
       }
 
-      this.wrapper.addEventListener('transitionend', event => resolve(value), {once: true})
+      this.wrapper.addEventListener('transitionend', event => {
+        resolve(value)
+
+        if (this._cyclic) {
+          this.handleCyclicTransitionEnd()
+        }
+
+        this._isTransitioning = false
+      }, {once: true})
     })
+  }
+
+  handleCyclicTransitionStart(value) {
+    if (this._currentIndex === this.length - 1 && value === 0) {
+      this.position++
+
+      this._currentSlottedElement = this.targetComponent.firstElementChild
+      this._currentSlottedElement.slot = 'next'
+
+      this._currentPlaceholderElement = document.createElement('div')
+      this._currentPlaceholderElement.classList.add('placeholder')
+
+      this.wrapper.prepend(this._currentPlaceholderElement)
+    } else if (this._currentIndex === 0 && value === this.length - 1) {
+      this.removeTransition()
+
+      this.position++
+
+      // Trigger layout to calculate styles
+      this.wrapper.getBoundingClientRect()
+
+      this.restoreTransition()
+
+      this.position--
+
+      this._currentSlottedElement = this.targetComponent.lastElementChild
+      this._currentSlottedElement.slot = 'previous'
+    } else {
+      this.position = value
+    }
+  }
+
+  handleCyclicTransitionEnd() {
+    if (this._currentSlottedElement == null) return
+
+    this.removeTransition()
+
+    this.position = this._currentIndex
+
+    this._currentSlottedElement.removeAttribute('slot')
+    this._currentSlottedElement = null
+
+    if (this._currentPlaceholderElement != null) {
+      this._currentPlaceholderElement.remove()
+      this._currentPlaceholderElement = null
+    }
+
+    // Trigger layout to calculate styles
+    this.wrapper.getBoundingClientRect()
+
+    this.restoreTransition()
   }
 
   get transitionDuration() {
