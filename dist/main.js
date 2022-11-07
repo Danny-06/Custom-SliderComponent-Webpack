@@ -124,8 +124,7 @@ class SliderInterface {
       _reversed: {writable: true, value: false},
       _cyclic: {writable: true, value: false},
       _isTransitioning: {writable: true, value: false},
-      _currentSlottedElement: {writable: true, value: null},
-      _currentPlaceholderElement: {writable: true, value: null}
+      _currentSlottedElement: {writable: true, value: null}
     })
 
     this._direction = this.targetComponent.dataset.direction ?? this._direction
@@ -299,17 +298,24 @@ class SliderInterface {
 
   handleCyclicTransitionStart(value) {
     if (this._currentIndex === this.length - 1 && value === 0) {
-      this.position++
+      this.removeTransition()
 
       this._currentSlottedElement = this.targetComponent.firstElementChild
       this._currentSlottedElement.slot = 'next'
 
-      this._currentPlaceholderElement = document.createElement('div')
-      this._currentPlaceholderElement.classList.add('placeholder')
+      this.position--
 
-      this.wrapper.prepend(this._currentPlaceholderElement)
+      // Trigger layout to calculate styles
+      this.wrapper.getBoundingClientRect()
+
+      this.restoreTransition()
+
+      this.position++
     } else if (this._currentIndex === 0 && value === this.length - 1) {
       this.removeTransition()
+
+      this._currentSlottedElement = this.targetComponent.lastElementChild
+      this._currentSlottedElement.slot = 'previous'
 
       this.position++
 
@@ -319,9 +325,6 @@ class SliderInterface {
       this.restoreTransition()
 
       this.position--
-
-      this._currentSlottedElement = this.targetComponent.lastElementChild
-      this._currentSlottedElement.slot = 'previous'
     } else {
       this.position = value
     }
@@ -336,11 +339,6 @@ class SliderInterface {
 
     this._currentSlottedElement.removeAttribute('slot')
     this._currentSlottedElement = null
-
-    if (this._currentPlaceholderElement != null) {
-      this._currentPlaceholderElement.remove()
-      this._currentPlaceholderElement = null
-    }
 
     // Trigger layout to calculate styles
     this.wrapper.getBoundingClientRect()
@@ -514,7 +512,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 
-  const css = ":host {\r\n  box-sizing: border-box;\r\n}\r\n\r\n*:not(:host),\r\n*::before,\r\n*::after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n* {\r\n  min-width: 0;\r\n  min-height: 0;\r\n  flex-shrink: 0;\r\n}\r\n\r\n:host {\r\n  width: 100%;\r\n  aspect-ratio: 16 / 9;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper {\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n\r\n  transition-property: transform;\r\n  transition-duration: 0.2s;\r\n}\r\n\r\n.wrapper, .wrapper.horizontal {\r\n  flex-direction: row;\r\n  transform: translateX( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.horizontal.reversed {\r\n  flex-direction: row-reverse;\r\n  transform: translateX( calc( 100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical {\r\n  flex-direction: column;\r\n  transform: translateY( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical.reversed {\r\n  flex-direction: column-reverse;\r\n  transform: translateY( calc( 100% * var(--position, 0)) );\r\n}\r\n\r\n.placeholder {\r\n  width: 100%;\r\n  height: 100%;\r\n  visibility: hidden;\r\n}\r\n"
+  const css = ":host {\r\n  box-sizing: border-box;\r\n}\r\n\r\n*:not(:host),\r\n*::before,\r\n*::after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n* {\r\n  min-width: 0;\r\n  min-height: 0;\r\n  flex-shrink: 0;\r\n}\r\n\r\n:host {\r\n  width: 100%;\r\n  aspect-ratio: 16 / 9;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper {\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n\r\n  transition-property: transform;\r\n  transition-duration: 0.2s;\r\n}\r\n\r\n.wrapper, .wrapper.horizontal {\r\n  flex-direction: row;\r\n  transform: translateX( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.horizontal.reversed {\r\n  flex-direction: row-reverse;\r\n  transform: translateX( calc( 100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical {\r\n  flex-direction: column;\r\n  transform: translateY( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical.reversed {\r\n  flex-direction: column-reverse;\r\n  transform: translateY( calc( 100% * var(--position, 0)) );\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
   stylesheet.replace(css)
