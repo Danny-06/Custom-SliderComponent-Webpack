@@ -1,5 +1,5 @@
 import mainStyleSheet from './styles/main.css'
-import { createWebComponent, SliderComponent } from './slider-components/index.js'
+import { createWebComponent, SliderComponent } from './slider-component/index.js'
 
 
 document.adoptedStyleSheets = [mainStyleSheet]

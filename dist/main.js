@@ -24,11 +24,11 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SliderComponent": () => (/* reexport safe */ _components_SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__.SliderComponent),
+/* harmony export */   "SliderComponent": () => (/* reexport safe */ _SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__.SliderComponent),
 /* harmony export */   "createWebComponent": () => (/* reexport safe */ _libs_createWebComponent_js__WEBPACK_IMPORTED_MODULE_0__.createWebComponent)
 /* harmony export */ });
 /* harmony import */ var _libs_createWebComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _components_SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
 
 
 
@@ -584,7 +584,7 @@ var __webpack_exports__ = {};
 (() => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _slider_components_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 
 
 
@@ -592,7 +592,7 @@ __webpack_require__.r(__webpack_exports__);
 document.adoptedStyleSheets = [_styles_main_css__WEBPACK_IMPORTED_MODULE_0__["default"]]
 
 
-const sliderComponent       = (0,_slider_components_index_js__WEBPACK_IMPORTED_MODULE_1__.createWebComponent)(_slider_components_index_js__WEBPACK_IMPORTED_MODULE_1__.SliderComponent, document.getElementById('slider'))
+const sliderComponent       = (0,_slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__.createWebComponent)(_slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__.SliderComponent, document.getElementById('slider'))
 
 const scButtonNext     = sliderComponent.parentElement.querySelector('.next')
 const scButtonPrevious = sliderComponent.parentElement.querySelector('.previous')

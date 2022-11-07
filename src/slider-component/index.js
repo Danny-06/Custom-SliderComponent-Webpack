@@ -1,5 +1,5 @@
 import { createWebComponent } from './libs/createWebComponent.js'
-import { SliderComponent } from './components/SliderComponent/SliderComponent.js'
+import { SliderComponent } from './SliderComponent/SliderComponent.js'
 
 export {
   createWebComponent,
