@@ -179,6 +179,8 @@ class SliderInterface {
       }
 
       this.wrapper.addEventListener('transitionend', event => {
+        if (event.propertyName !== 'transform') return
+
         resolve(value)
 
         if (this._cyclic) {
@@ -191,7 +193,10 @@ class SliderInterface {
   }
 
   handleCyclicTransitionStart(value) {
-    if (this._currentIndex === this.length - 1 && value === 0) {
+    const isEndToStart = this._currentIndex === this.length - 1 && value === 0
+    const isStartToEnd = this._currentIndex === 0 && value === this.length - 1
+
+    if (isEndToStart) {
       this.removeTransition()
 
       this._currentSlottedElement = this.targetComponent.firstElementChild
@@ -205,7 +210,7 @@ class SliderInterface {
       this.restoreTransition()
 
       this.position++
-    } else if (this._currentIndex === 0 && value === this.length - 1) {
+    } else if (isStartToEnd) {
       this.removeTransition()
 
       this._currentSlottedElement = this.targetComponent.lastElementChild
