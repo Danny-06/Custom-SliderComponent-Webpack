@@ -49,6 +49,8 @@
 }
 
 .buttons {
+  position: relative;
+
   display: flex;
   justify-content: space-between;
   column-gap: 0.5rem;
