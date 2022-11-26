@@ -242,13 +242,13 @@ class SliderInterface {
     this.setCurrentIndex(value)
   }
 
-  setCurrentIndex(value) {
+  async setCurrentIndex(value) {
     if (typeof value !== 'number') {
       throw new TypeError(`Value must be a number`)
     }
 
-    if (this._cyclic && this._isTransitioning) {
-      return
+    if (this._cyclic && this._isTransitioning && this._isCurrentIndexStartOrEnd) {
+      await this._waitForTransformTransitionEnd()
     }
 
     this._isTransitioning = true
@@ -284,7 +284,8 @@ class SliderInterface {
         return
       }
 
-      this.wrapper.addEventListener('transitionend', event => {
+      this._waitForTransformTransitionEnd()
+      .then(() => {
         resolve(value)
 
         if (this._cyclic) {
@@ -292,12 +293,53 @@ class SliderInterface {
         }
 
         this._isTransitioning = false
-      }, {once: true})
+      })
     })
   }
 
+  async _waitForTransformTransitionEnd() {
+    await this._waitForEvent(this.wrapper, 'transitionend', event => event.propertyName !== 'transform')
+  }
+
+  _waitForEvent(target, eventType, callbackCheck) {
+    return new Promise(resolve => {
+      const abortController = new AbortController()
+
+      target.addEventListener(eventType, event => {
+        if (callbackCheck(event)) return
+
+        resolve(event)
+
+        abortController.abort()
+      }, {signal: abortController.signal})
+    })
+  }
+
+  get _isCurrentIndexStart() {
+    return this.isValueStart(this._currentIndex)
+  }
+
+  get _isCurrentIndexEnd() {
+    return this.isValueEnd(this._currentIndex)
+  }
+
+  get _isCurrentIndexStartOrEnd() {
+    return this._isCurrentIndexStart || this._isCurrentIndexEnd
+  }
+
+  isValueStart(value) {
+    return value === 0
+  }
+
+  isValueEnd(value) {
+    return value === this.length - 1
+  }
+
   handleCyclicTransitionStart(value) {
-    if (this._currentIndex === this.length - 1 && value === 0) {
+    const isEndToStart = this._isCurrentIndexEnd && this.isValueStart(value)
+    const isStartToEnd = this._isCurrentIndexStart && this.isValueEnd(value)
+
+    if (isEndToStart) {
       this.removeTransition()
 
       this._currentSlottedElement = this.targetComponent.firstElementChild
@@ -311,7 +353,7 @@ class SliderInterface {
       this.restoreTransition()
 
       this.position++
-    } else if (this._currentIndex === 0 && value === this.length - 1) {
+    } else if (isStartToEnd) {
       this.removeTransition()
 
       this._currentSlottedElement = this.targetComponent.lastElementChild
