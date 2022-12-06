@@ -341,6 +341,11 @@ export class SliderComponent extends HTMLElement {
     })
   }
 
+  /**
+   * @type {SliderInterface}
+   */
+  slider
+
   get innerHTML() {
     return super.innerHTML
   }

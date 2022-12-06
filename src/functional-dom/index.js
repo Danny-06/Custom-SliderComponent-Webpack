@@ -1,5 +1,21 @@
 import { createElement, setChildren, setClasses } from './libs/helpers.js'
 
+/**
+ * @typedef {(...children: HTMLElement) => DocumentFragment} DOMMaker
+ */
+
+/**
+ * @typedef FunctionalDOMProperties
+ * @property {string} id
+ * @property {string | string[]} class
+ * @property {{[key: string]: string}} dataset
+ * @property {{[key: string]: string}} attributes
+ * @property {{[key: string]: string}} style
+ */
+
+/**
+ * @type {DOMMaker & {[key: string]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElement}}
+ */
 const DOMMaker = new Proxy(function() {}, {
 
   apply: (target, thisArg, argArray) => {
@@ -26,6 +42,13 @@ const _ = DOMMaker
 
 export default _
 
+/**
+ * @template T
+ * @param {T extends HTMLElement ? T : never} element 
+ * @param {FunctionalDOMProperties} properties 
+ * @param  {...HTMLElement} children 
+ * @returns {...HTMLElement}
+ */
 export function buildElement(element, properties, ...children) {
   const {id, class: classes, style, dataset, attributes} = properties
 

@@ -23,9 +23,10 @@ const mutationObserver = new MutationObserver(mutations => {
  * Since the `<div>` is not an instance of the component is not posible to use `private properties`.
  * For that reason, is recommended to replace them with properties that starts with an underscore.
  * 
- * @param {class} classComponent 
+ * @template T
+ * @param {T.prototype extends HTMLElement ? T : never} classComponent 
  * @param {HTMLElement} [elementToApply=null]
- * @returns {HTMLElement}
+ * @returns {InstanceType<T>}
  */
 export function createWebComponent(classComponent, elementToApply = null) {
   if (!(classComponent.prototype instanceof HTMLElement)) {
