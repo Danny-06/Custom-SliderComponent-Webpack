@@ -22,7 +22,6 @@ class SliderInterface {
     })
 
     this._direction = this.targetComponent.dataset.direction ?? this._direction
-    this.direction = this._direction
 
   }
 
