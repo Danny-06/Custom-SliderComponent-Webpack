@@ -1,7 +1,10 @@
-import { createWebComponent } from './libs/createWebComponent.js'
+import _ from '../functional-dom/index.js'
+import { createWebComponent } from '../functional-dom/libs/create-web-component.js'
 import { SliderComponent } from './SliderComponent/SliderComponent.js'
 
-export {
-  createWebComponent,
-  SliderComponent
+
+export function Slider() {
+  const slider = createWebComponent(SliderComponent, _.div())
+
+  return slider
 }
