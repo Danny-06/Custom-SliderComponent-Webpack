@@ -95,14 +95,6 @@ class SliderInterface {
 
     this._direction = value
 
-    this.targetComponent.ignoreAttributeChange = true
-
-    this.targetComponent.dataset.direction = value
-
-    queueMicrotask(() => {
-      this.targetComponent.ignoreAttributeChange = false
-    })
-
     this.removeTransition()
 
     if (value === 'horizontal') {
@@ -354,15 +346,14 @@ export class SliderComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['data-direction']
+    return []
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (this.ignoreAttributeChange) return
 
     switch (name) {
-      case 'data-direction':
-        this.slider.direction = newValue
+      case '':
       break
     }
   }
