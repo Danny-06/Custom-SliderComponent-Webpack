@@ -9,7 +9,7 @@ import { createElement, setChildren, setClasses } from './libs/helpers.js'
  */
 
 /**
- * @typedef {DOMMakerFunc & DOMMakerProperties} DOMMaker
+ * @typedef {DOMMakerFunc & DOMMakerProperties} DOMMakerProxy
  */
 
 /**
@@ -22,7 +22,7 @@ import { createElement, setChildren, setClasses } from './libs/helpers.js'
  */
 
 /**
- * @type {DOMMaker}
+ * @type {DOMMakerProxy}
  */
 const DOMMaker = new Proxy(function() {}, {
 
