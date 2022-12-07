@@ -10,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 
-  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 300px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  margin: auto;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  justify-content: space-between;\r\n  column-gap: 0.5rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n"
+  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 300px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  margin: auto;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #290;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: rgb(52, 181, 16);\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: rgb(31, 111, 9);\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
   stylesheet.replace(css)
@@ -24,19 +24,286 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SliderComponent": () => (/* reexport safe */ _SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__.SliderComponent),
-/* harmony export */   "createWebComponent": () => (/* reexport safe */ _libs_createWebComponent_js__WEBPACK_IMPORTED_MODULE_0__.createWebComponent)
+/* harmony export */   "Slider": () => (/* binding */ Slider)
 /* harmony export */ });
-/* harmony import */ var _libs_createWebComponent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 
 
+
+
+
+function Slider() {
+  const slider = (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__.createWebComponent)(_SliderComponent_SliderComponent_js__WEBPACK_IMPORTED_MODULE_1__.SliderComponent, _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div())
+
+  return slider
+}
+
+
+/***/ }),
+/* 3 */
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "buildElement": () => (/* reexport safe */ _libs_core_js__WEBPACK_IMPORTED_MODULE_0__.buildElement),
+/* harmony export */   "createWebComponent": () => (/* reexport safe */ _libs_create_web_component_js__WEBPACK_IMPORTED_MODULE_1__.createWebComponent),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _libs_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
+/* harmony import */ var _libs_create_web_component_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+
+
+
+
+const _ = _libs_core_js__WEBPACK_IMPORTED_MODULE_0__["default"]
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_);
 
 
 
 
 /***/ }),
-/* 3 */
+/* 4 */
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "buildElement": () => (/* binding */ buildElement),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+
+
+/**
+ * @typedef {(...children?: HTMLElement) => DocumentFragment} DOMMakerFunc
+ */
+
+/**
+ * @typedef {{
+ *  [key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElementTagNameMap[key]
+ * }} DOMMakerHTMLProperties
+ */
+
+/**
+* @typedef {{
+*  [key: string]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElement
+* }} DOMMakerProperties
+*/
+
+/**
+ * @typedef {DOMMakerFunc & DOMMakerHTMLProperties & DOMMakerProperties} DOMMakerProxy
+ */
+
+/**
+ * @typedef FunctionalDOMProperties
+ * @property {string} id
+ * @property {string | string[]} class
+ * @property {{[key: string]: string}} dataset
+ * @property {{[key: string]: string}} attributes
+ * @property {{[key: string]: string}} style
+ */
+
+
+/**
+ * @type {DOMMakerProxy}
+ * 
+ * Proxy object that is the core of this library.  
+ * By invoking it as a `function` you can wrap multiple `DOM elements` in a `DocumentFramgent`.
+ * 
+ * If instead we access a `property` of it  
+ * we will get a `function` that creates a `DOM element`  
+ * which `tagName` match the name of the function.
+ * 
+ * @example
+ *  const div = document.createElement('div')
+ *  const button = document.createElement('button')
+ * 
+ *  // DocumentFragment<HTMLDivElement, HTMLButtonElement>
+ *  const documentFragment = DOMMaker(div, button)
+ * 
+ * @example
+ * const div    = DOMMaker.div()
+ * const button = DOMMaker.button()
+ * 
+ * const customElement = DOMMaker['custom-element']()
+ *  
+ */
+const DOMMaker = new Proxy(function() {}, {
+
+  /**
+   * 
+   * @param {*} target 
+   * @param {*} thisArg 
+   * @param {HTMLElement[]} argArray 
+   * @returns {DocumentFragment}
+   */
+  apply: (target, thisArg, argArray) => {
+    const documentFragment = new DocumentFragment()
+
+    documentFragment.append(...argArray)
+
+    return documentFragment
+  },
+
+  /**
+   * @template T
+   * @param {*} target 
+   * @param {T extends keyof HTMLElementTagNameMap ? T : HTMLElement} property 
+   * @param {*} receiver 
+   * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[T]}
+   */
+  get: (target, property, receiver) => {
+    return function(properties, ...children) {
+      const element = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.createElement)(property)
+
+      buildElement(element, properties, ...children)
+
+      return element
+    }
+  }
+
+})
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DOMMaker);
+
+/**
+ * @template T
+ * @param {T extends HTMLElement ? T : never} element 
+ * @param {FunctionalDOMProperties=} properties 
+ * @param  {...HTMLElement=} children 
+ * @returns {T}
+ * 
+ * It's similar to `DOMMaker.property()` but instead of  
+ * creating an element it just takes an `element` and applies  
+ * the `properties` and the `children` to it.
+ */
+function buildElement(element, properties = {}, ...children) {
+  const {id, class: classes, dataset, attributes, style} = properties
+
+  if (id) {
+    element.id = id
+  }
+
+  if (classes) {
+    (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setClasses)(element, classes)
+  }
+
+  if (dataset) {
+    for (const [property, value] of Object.entries(dataset ?? {})) {
+      if (value === undefined) continue
+
+      element.dataset[property] = value
+    }
+  }
+
+  for (const [property, value] of Object.entries(attributes ?? {})) {
+    if (value === undefined) continue
+
+    if (['src', 'href'].includes(property)) {
+      element.setAttribute(property, tp.createScriptURL(value))
+
+      continue
+    }
+
+    element.setAttribute(property, value)
+  }
+
+  if (style) {
+    (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setStyleProperties)(element.style, style)
+  }
+
+  (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setChildren)(element, children)
+
+  return element
+}
+
+
+/***/ }),
+/* 5 */
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createElement": () => (/* binding */ createElement),
+/* harmony export */   "setChildren": () => (/* binding */ setChildren),
+/* harmony export */   "setClasses": () => (/* binding */ setClasses),
+/* harmony export */   "setStyleProperties": () => (/* binding */ setStyleProperties)
+/* harmony export */ });
+/**
+ * @template T
+ * @param {T extends keyof HTMLElementTagNameMap ? T : never} tagName 
+ * @returns {HTMLElementTagNameMap[T]}
+ */
+function createElement(tagName) {
+  const element = document.createElement(tagName)
+
+  return element
+}
+
+
+/**
+ * 
+ * @param {HTMLElement} element 
+ * @param {string | string[]} classes 
+ */
+function setClasses(element, classes) {
+  if (Array.isArray(classes)) {
+    element.className = classes.join(' ')
+  } else if (typeof classes === 'string') {
+    element.className = classes
+  }
+}
+
+/**
+ * 
+ * @param {HTMLElement} element 
+ * @param {HTMLElement[]} children 
+ */
+function setChildren(element, children) {
+  element.append(...children)
+}
+
+
+/**
+ * 
+ * @param {string} string 
+ * @returns {string}
+ */
+const lowerCaseToHyphen = string => string.split(/(?=[A-Z])/).map(str => str.toLowerCase()).join('-')
+
+/**
+ *
+ * @param {CSSStyleDeclaration} style
+ * @param {{[key: string]: string}} properties
+ */
+function setStyleProperties(style, properties) {
+  for (const property in properties) {
+
+    let propertyName = property
+
+    const isCustomProperty = propertyName.startsWith('--')
+    const hasHyphen = propertyName.includes('-')
+    if(!isCustomProperty && !hasHyphen) {
+      propertyName = lowerCaseToHyphen(propertyName)
+    }
+
+    const prefixVendors = propertyName.search(/^(webkit|moz|ms|o)-/) !== -1
+    if(prefixVendors) {
+      propertyName = `-${propertyName}`
+    }
+
+    const priority = properties[property].match(/![a-z]+$/ig)?.[0].slice(1) ?? ''
+    const propertyValue = priority ? properties[property].replace(new RegExp(`!${priority}$`, 'i'), '') : properties[property]
+
+    style.setProperty(propertyName, propertyValue, priority)
+
+  }
+}
+
+
+/***/ }),
+/* 6 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -58,19 +325,45 @@ const mutationObserver = new MutationObserver(mutations => {
 })
 
 /**
- * Allows the creation of custom elements through a `<div>`.
- * The class provided is invoked in the `<div>` and then its prototype is changed
- * with the prototype of the class.
+ * Allows the creation of custom elements through any `HTMLElement` like a `<div>`.  
+ * The class provided is invoked in the `element` and then its `prototype` is changed  
+ * with the prototype of the `class`.  
  * 
- * To declare the `constructor` of the class it must be declared as `_constructor_`
- * instead of the normal constructor to allow the function to invoke it in the `<div>`.
+ * To declare the `constructor` of the class it must be declared as `_constructor_`  
+ * instead of the normal constructor to allow the function to invoke it in the `element`.  
  * 
- * Since the `<div>` is not an instance of the component is not posible to use `private properties`.
- * For that reason, is recommended to replace them with properties that starts with an underscore.
+ * Since the `element` is not an instance of the component is not posible to use `private properties`.  
+ * For that reason, is recommended to replace them with properties that starts with an underscore.  
  * 
- * @param {class} classComponent 
+ * @template T
+ * @param {T.prototype extends HTMLElement ? T : never} classComponent 
  * @param {HTMLElement} [elementToApply=null]
- * @returns {HTMLElement}
+ * @returns {InstanceType<T>}
+ * 
+ * @example
+ * const component = createWebComponent(class MyComponent extends HTMLElement {
+ *   _constructor_() {
+ *     this.property = 'value'
+ *
+ *     console.log(this._privateValue)
+ *   }
+ *
+ *   get innerHTML() {
+ *     return super.innerHTML
+ *   }
+ *
+ *   set innerHTML(value) {
+ *     super.innerHTML = value
+ *   }
+ *
+ *   static get observedAttributes() {
+ *     return ['my-attribute']
+ *   }
+ *
+ *   attributeChangedCallback(name, oldValue, newValue) {
+ *     console.log(...arguments)
+ *   }
+ * })
  */
 function createWebComponent(classComponent, elementToApply = null) {
   if (!(classComponent.prototype instanceof HTMLElement)) {
@@ -95,15 +388,15 @@ function createWebComponent(classComponent, elementToApply = null) {
 
 
 /***/ }),
-/* 4 */
+/* 7 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SliderComponent": () => (/* binding */ SliderComponent)
 /* harmony export */ });
-/* harmony import */ var _SliderComponent_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var _SliderComponent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+/* harmony import */ var _SliderComponent_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _SliderComponent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
 
 
 
@@ -128,7 +421,6 @@ class SliderInterface {
     })
 
     this._direction = this.targetComponent.dataset.direction ?? this._direction
-    this.direction = this._direction
 
   }
 
@@ -201,14 +493,6 @@ class SliderInterface {
     }
 
     this._direction = value
-
-    this.targetComponent.ignoreAttributeChange = true
-
-    this.targetComponent.dataset.direction = value
-
-    queueMicrotask(() => {
-      this.targetComponent.ignoreAttributeChange = false
-    })
 
     this.removeTransition()
 
@@ -447,6 +731,11 @@ class SliderComponent extends HTMLElement {
     })
   }
 
+  /**
+   * @type {SliderInterface}
+   */
+  slider
+
   get innerHTML() {
     return super.innerHTML
   }
@@ -456,15 +745,14 @@ class SliderComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['data-direction']
+    return []
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (this.ignoreAttributeChange) return
 
     switch (name) {
-      case 'data-direction':
-        this.slider.direction = newValue
+      case '':
       break
     }
   }
@@ -473,7 +761,7 @@ class SliderComponent extends HTMLElement {
 
 
 /***/ }),
-/* 5 */
+/* 8 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -521,7 +809,7 @@ __webpack_require__.r(__webpack_exports__);
     return trustedHTMLPolicy.createHTML(htmlString)
   }
 
-  const html = "<div part=\"wrapper\" class=\"wrapper\">\r\n  <slot name=\"previous\"></slot>\r\n  <slot></slot>\r\n  <slot name=\"next\"></slot>\r\n</div>\r\n"
+  const html = "<div part=\"wrapper\" class=\"wrapper horizontal\">\r\n  <slot name=\"previous\"></slot>\r\n  <slot></slot>\r\n  <slot name=\"next\"></slot>\r\n</div>\r\n"
 
   const trustedHTML = turnStringIntoTrustedHTML(html)
 
@@ -546,7 +834,7 @@ __webpack_require__.r(__webpack_exports__);
   
 
 /***/ }),
-/* 6 */
+/* 9 */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -554,7 +842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 
-  const css = ":host {\r\n  box-sizing: border-box;\r\n}\r\n\r\n*:not(:host),\r\n*::before,\r\n*::after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n* {\r\n  min-width: 0;\r\n  min-height: 0;\r\n  flex-shrink: 0;\r\n}\r\n\r\n:host {\r\n  width: 100%;\r\n  aspect-ratio: 16 / 9;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper {\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n\r\n  transition-property: transform;\r\n  transition-duration: 0.2s;\r\n}\r\n\r\n.wrapper, .wrapper.horizontal {\r\n  flex-direction: row;\r\n  transform: translateX( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.horizontal.reversed {\r\n  flex-direction: row-reverse;\r\n  transform: translateX( calc( 100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical {\r\n  flex-direction: column;\r\n  transform: translateY( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical.reversed {\r\n  flex-direction: column-reverse;\r\n  transform: translateY( calc( 100% * var(--position, 0)) );\r\n}\r\n"
+  const css = ":host {\r\n  box-sizing: border-box;\r\n}\r\n\r\n*:not(:host),\r\n*::before,\r\n*::after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n* {\r\n  min-width: 0;\r\n  min-height: 0;\r\n  flex-shrink: 0;\r\n}\r\n\r\n:host {\r\n  width: 100%;\r\n  aspect-ratio: 16 / 9;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper {\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n\r\n  transition-property: transform;\r\n  transition-duration: 0.2s;\r\n}\r\n\r\n.wrapper,\r\n.wrapper.horizontal {\r\n  flex-direction: row;\r\n  transform: translateX( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.reversed,\r\n.wrapper.horizontal.reversed {\r\n  flex-direction: row-reverse;\r\n  transform: translateX( calc( 100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical {\r\n  flex-direction: column;\r\n  transform: translateY( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical.reversed {\r\n  flex-direction: column-reverse;\r\n  transform: translateY( calc( 100% * var(--position, 0)) );\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
   stylesheet.replace(css)
@@ -625,6 +913,8 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+
 
 
 
@@ -632,18 +922,67 @@ __webpack_require__.r(__webpack_exports__);
 document.adoptedStyleSheets = [_styles_main_css__WEBPACK_IMPORTED_MODULE_0__["default"]]
 
 
-const sliderComponent       = (0,_slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__.createWebComponent)(_slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__.SliderComponent, document.getElementById('slider'))
+function WrapperComponent() {
+  const domSlider = (0,_slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__.Slider)()
 
-const scButtonNext     = sliderComponent.parentElement.querySelector('.next')
-const scButtonPrevious = sliderComponent.parentElement.querySelector('.previous')
+  const previousBtn = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].button()
+  const nextBtn     = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].button()
 
-scButtonNext.addEventListener('click', event => {
-  sliderComponent.slider.next()
-})
+  const toggleDirectionBtn = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].button()
+  const toggleReversedBtn = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].button()
+  const toggleCyclicBtn = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].button()
+  const toggleOverflowBtn = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].button()
 
-scButtonPrevious.addEventListener('click', event => {
-  sliderComponent.slider.previous()
-})
+  previousBtn.addEventListener('click', event => {
+    domSlider.slider.previous()
+  })
+
+  nextBtn.addEventListener('click', event => {
+    domSlider.slider.next()
+  })
+
+  toggleDirectionBtn.addEventListener('click', event => {
+    domSlider.slider.toggleDirection()
+  })
+
+  toggleReversedBtn.addEventListener('click', event => {
+    domSlider.slider.toggleReversed()
+  })
+
+  toggleCyclicBtn.addEventListener('click', event => {
+    domSlider.slider.toggleCyclic()
+  })
+
+  toggleOverflowBtn.addEventListener('click', event => {
+    domSlider.classList.toggle('overflow-visible')
+  })
+
+  return _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'wrapper-component'},
+    (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(domSlider, {class: 'component'},
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b1'}, 0),
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b2'}, 1),
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b3'}, 2),
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b4'}, 3),
+    ),
+    _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'buttons'},
+      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(previousBtn, {class: 'previous', style: {marginRight: 'auto'}}, 'Previous'),
+
+      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleDirectionBtn, {class: 'toggle-direction'}, 'Toggle Direction'),
+      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleReversedBtn, {class: 'toggle-reversed'}, 'Toggle Reversed'),
+      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
+      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
+
+      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(nextBtn, {class: 'next', style: {marginLeft: 'auto'}}, 'Next'),
+    )
+  )
+}
+
+
+const appContent = document.querySelector('#app-content')
+
+const render = WrapperComponent()
+
+appContent.append(render)
 
 })();
 
