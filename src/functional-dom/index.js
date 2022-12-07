@@ -1,18 +1,18 @@
 import { createElement, setChildren, setClasses, setStyleProperties } from './libs/helpers.js'
 
 /**
- * @typedef {(...children: HTMLElement) => DocumentFragment} DOMMakerFunc
+ * @typedef {(...children?: HTMLElement) => DocumentFragment} DOMMakerFunc
  */
 
 /**
  * @typedef {{
- *  [key in keyof HTMLElementTagNameMap]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[key]
+ *  [key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElementTagNameMap[key]
  * }} DOMMakerHTMLProperties
  */
 
 /**
 * @typedef {{
-*  [key: string]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElement
+*  [key: string]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElement
 * }} DOMMakerProperties
 */
 
@@ -97,8 +97,8 @@ export default _
 /**
  * @template T
  * @param {T extends HTMLElement ? T : never} element 
- * @param {FunctionalDOMProperties} properties 
- * @param  {...HTMLElement} children 
+ * @param {FunctionalDOMProperties=} properties 
+ * @param  {...HTMLElement=} children 
  * @returns {T}
  * 
  * It's similar to `DOMMaker.property()` but instead of  
