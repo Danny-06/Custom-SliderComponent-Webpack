@@ -11,7 +11,7 @@ import { createElement, setChildren, setClasses, setStyleProperties } from './li
  */
 
 /**
- * @typedef {{
+* @typedef {{
 *  [key: string]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElement
 * }} DOMMakerProperties
 */
@@ -34,11 +34,11 @@ import { createElement, setChildren, setClasses, setStyleProperties } from './li
  * @type {DOMMakerProxy}
  * 
  * Proxy object that is the core of this library.  
- * By invoking it as a function you can wrap multiple DOM elements in a DocumentFramgent.
+ * By invoking it as a `function` you can wrap multiple `DOM elements` in a `DocumentFramgent`.
  * 
- * If instead we access a property of it  
- * we will get a function that creates a DOM element  
- * which tagName match the name of the function.
+ * If instead we access a `property` of it  
+ * we will get a `function` that creates a `DOM element`  
+ * which `tagName` match the name of the function.
  * 
  * @example
  *  const div = document.createElement('div')
@@ -100,6 +100,10 @@ export default _
  * @param {FunctionalDOMProperties} properties 
  * @param  {...HTMLElement} children 
  * @returns {T}
+ * 
+ * It's similar to `DOMMaker.property()` but instead of  
+ * creating an element it just takes an `element` and applies  
+ * the `properties` and the `children` to it.
  */
 export function buildElement(element, properties = {}, ...children) {
   const {id, class: classes, style, dataset, attributes} = properties
