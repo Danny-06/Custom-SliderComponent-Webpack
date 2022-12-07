@@ -1,5 +1,5 @@
 import _ from '../functional-dom/index.js'
-import { createWebComponent } from '../functional-dom/libs/create-web-component.js'
+import { createWebComponent } from '../functional-dom/index.js'
 import { SliderComponent } from './SliderComponent/SliderComponent.js'
 
 

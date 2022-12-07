@@ -27,6 +27,10 @@
   width: 100%;
 }
 
+.component.overflow-visible {
+  overflow: visible;
+}
+
 .component > .box {
   width: 100%;
   height: 100%;
@@ -52,7 +56,7 @@
   position: relative;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   column-gap: 0.5rem;
 }
 

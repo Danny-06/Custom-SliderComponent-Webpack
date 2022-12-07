@@ -12,12 +12,33 @@ function WrapperComponent() {
   const previousBtn = _.button()
   const nextBtn     = _.button()
 
+  const toggleDirectionBtn = _.button()
+  const toggleReversedBtn = _.button()
+  const toggleCyclicBtn = _.button()
+  const toggleOverflowBtn = _.button()
+
   previousBtn.addEventListener('click', event => {
     domSlider.slider.previous()
   })
 
   nextBtn.addEventListener('click', event => {
     domSlider.slider.next()
+  })
+
+  toggleDirectionBtn.addEventListener('click', event => {
+    domSlider.slider.toggleDirection()
+  })
+
+  toggleReversedBtn.addEventListener('click', event => {
+    domSlider.slider.toggleReversed()
+  })
+
+  toggleCyclicBtn.addEventListener('click', event => {
+    domSlider.slider.toggleCyclic()
+  })
+
+  toggleOverflowBtn.addEventListener('click', event => {
+    domSlider.classList.toggle('overflow-visible')
   })
 
   return _.div({class: 'wrapper-component'},
@@ -28,8 +49,14 @@ function WrapperComponent() {
       _.div({class: 'box -b4'}, 3),
     ),
     _.div({class: 'buttons'},
-      $(previousBtn, {class: 'previous'}, 'Previous'),
-      $(nextBtn,     {class: 'next'},     'Next'),
+      $(previousBtn, {class: 'previous', style: {marginRight: 'auto'}}, 'Previous'),
+
+      $(toggleDirectionBtn, {class: 'toggle-direction'}, 'Toggle Direction'),
+      $(toggleReversedBtn, {class: 'toggle-reversed'}, 'Toggle Reversed'),
+      $(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
+      $(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
+
+      $(nextBtn, {class: 'next', style: {marginLeft: 'auto'}}, 'Next'),
     )
   )
 }
