@@ -5,7 +5,9 @@ import { createElement, setChildren, setClasses } from './libs/helpers.js'
  */
 
 /**
- * @typedef {{[key: string]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElement}} DOMMakerProperties
+ * @typedef {{
+ *  [key in keyof HTMLElementTagNameMap]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[key]
+ * }} DOMMakerProperties
  */
 
 /**
@@ -26,6 +28,13 @@ import { createElement, setChildren, setClasses } from './libs/helpers.js'
  */
 const DOMMaker = new Proxy(function() {}, {
 
+  /**
+   * 
+   * @param {*} target 
+   * @param {*} thisArg 
+   * @param {HTMLElement[]} argArray 
+   * @returns {DocumentFragment}
+   */
   apply: (target, thisArg, argArray) => {
     const documentFragment = new DocumentFragment()
 
@@ -34,8 +43,15 @@ const DOMMaker = new Proxy(function() {}, {
     return documentFragment
   },
 
+  /**
+   * @template T
+   * @param {*} target 
+   * @param {T extends keyof HTMLElementTagNameMap ? T : never} property 
+   * @param {*} receiver 
+   * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[T]}
+   */
   get: (target, property, receiver) => {
-    return function(properties = {}, ...children) {
+    return function(properties, ...children) {
       const element = createElement(property)
 
       buildElement(element, properties, ...children)
@@ -52,10 +68,10 @@ export default _
 
 /**
  * @template T
- * @param {T extends HTMLElement ? T : never} element 
+ * @param {T extends Node ? T : never} element 
  * @param {FunctionalDOMProperties} properties 
  * @param  {...HTMLElement} children 
- * @returns {...HTMLElement}
+ * @returns {T}
  */
 export function buildElement(element, properties, ...children) {
   const {id, class: classes, style, dataset, attributes} = properties

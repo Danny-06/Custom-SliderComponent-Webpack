@@ -1,3 +1,8 @@
+/**
+ * @template T
+ * @param {T extends keyof HTMLElementTagNameMap ? T : never} tagName 
+ * @returns {HTMLElementTagNameMap[T]}
+ */
 export function createElement(tagName) {
   const element = document.createElement(tagName)
 
@@ -5,6 +10,11 @@ export function createElement(tagName) {
 }
 
 
+/**
+ * 
+ * @param {HTMLElement} element 
+ * @param {string | string[]} classes 
+ */
 export function setClasses(element, classes) {
   if (Array.isArray(classes)) {
     element.className = classes.join(' ')
@@ -13,17 +23,27 @@ export function setClasses(element, classes) {
   }
 }
 
+/**
+ * 
+ * @param {HTMLElement} element 
+ * @param {HTMLElement[]} children 
+ */
 export function setChildren(element, children) {
   element.append(...children)
 }
 
 
+/**
+ * 
+ * @param {string} string 
+ * @returns {string}
+ */
 const lowerCaseToHyphen = string => string.split(/(?=[A-Z])/).map(str => str.toLowerCase()).join('-')
 
 /**
  *
  * @param {CSSStyleDeclaration} style
- * @param {{}} properties
+ * @param {{[key: string]: string}} properties
  */
 export function setStyleProperties(style, properties) {
   for (const property in properties) {
