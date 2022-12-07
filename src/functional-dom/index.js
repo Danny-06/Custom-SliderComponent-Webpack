@@ -1,4 +1,4 @@
-import { createElement, setChildren, setClasses } from './libs/helpers.js'
+import { createElement, setChildren, setClasses, setStyleProperties } from './libs/helpers.js'
 
 /**
  * @typedef {(...children: HTMLElement) => DocumentFragment} DOMMakerFunc
@@ -7,11 +7,17 @@ import { createElement, setChildren, setClasses } from './libs/helpers.js'
 /**
  * @typedef {{
  *  [key in keyof HTMLElementTagNameMap]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[key]
- * }} DOMMakerProperties
+ * }} DOMMakerHTMLProperties
  */
 
 /**
- * @typedef {DOMMakerFunc & DOMMakerProperties} DOMMakerProxy
+ * @typedef {{
+*  [key: string]: (properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElement
+* }} DOMMakerProperties
+*/
+
+/**
+ * @typedef {DOMMakerFunc & DOMMakerHTMLProperties & DOMMakerProperties} DOMMakerProxy
  */
 
 /**
@@ -23,8 +29,30 @@ import { createElement, setChildren, setClasses } from './libs/helpers.js'
  * @property {{[key: string]: string}} style
  */
 
+
 /**
  * @type {DOMMakerProxy}
+ * 
+ * Proxy object that is the core of this library.  
+ * By invoking it as a function you can wrap multiple DOM elements in a DocumentFramgent.
+ * 
+ * If instead we access a property of it  
+ * we will get a function that creates a DOM element  
+ * which tagName match the name of the function.
+ * 
+ * @example
+ *  const div = document.createElement('div')
+ *  const button = document.createElement('button')
+ * 
+ *  // DocumentFragment<HTMLDivElement, HTMLButtonElement>
+ *  const documentFragment = DOMMaker(div, button)
+ * 
+ * @example
+ * const div    = DOMMaker.div()
+ * const button = DOMMaker.button()
+ * 
+ * const customElement = DOMMaker['custom-element']()
+ *  
  */
 const DOMMaker = new Proxy(function() {}, {
 
@@ -46,7 +74,7 @@ const DOMMaker = new Proxy(function() {}, {
   /**
    * @template T
    * @param {*} target 
-   * @param {T extends keyof HTMLElementTagNameMap ? T : never} property 
+   * @param {T extends keyof HTMLElementTagNameMap ? T : HTMLElement} property 
    * @param {*} receiver 
    * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[T]}
    */
@@ -68,12 +96,12 @@ export default _
 
 /**
  * @template T
- * @param {T extends Node ? T : never} element 
+ * @param {T extends HTMLElement ? T : never} element 
  * @param {FunctionalDOMProperties} properties 
  * @param  {...HTMLElement} children 
  * @returns {T}
  */
-export function buildElement(element, properties, ...children) {
+export function buildElement(element, properties = {}, ...children) {
   const {id, class: classes, style, dataset, attributes} = properties
 
   if (id) {
