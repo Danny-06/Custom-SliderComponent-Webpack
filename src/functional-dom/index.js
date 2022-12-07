@@ -106,7 +106,7 @@ export default _
  * the `properties` and the `children` to it.
  */
 export function buildElement(element, properties = {}, ...children) {
-  const {id, class: classes, style, dataset, attributes} = properties
+  const {id, class: classes, dataset, attributes, style} = properties
 
   if (id) {
     element.id = id
