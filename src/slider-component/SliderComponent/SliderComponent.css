@@ -31,11 +31,13 @@
   transition-duration: 0.2s;
 }
 
-.wrapper, .wrapper.horizontal {
+.wrapper,
+.wrapper.horizontal {
   flex-direction: row;
   transform: translateX( calc( -100% * var(--position, 0)) );
 }
 
+.wrapper.reversed,
 .wrapper.horizontal.reversed {
   flex-direction: row-reverse;
   transform: translateX( calc( 100% * var(--position, 0)) );
