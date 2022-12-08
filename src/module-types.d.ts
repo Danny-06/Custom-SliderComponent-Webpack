@@ -8,7 +8,7 @@ declare module '*.css'{
 declare module '*.html'{
   const htmlContent:  {
     documentFragment: DocumentFragment
-    clone(ownerDocument: Document = null): DocumentFragment
+    clone(ownerDocument?: Document): DocumentFragment
   }
   export default htmlContent
 }
