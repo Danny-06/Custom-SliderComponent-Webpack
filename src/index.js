@@ -58,6 +58,18 @@ function WrapperComponent() {
       $(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
       $(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
     ),
+    _.$.div({class: 'shadow-dom'}, {
+        children: [
+          _.div({class: 'internal'}, 'Shadow DOM'),
+          _.div({class: 'wrapper-slot', style: {display: 'flex', columnGap: '1rem'}},
+            'Slot',
+            _.slot()
+          ),
+        ]
+      },
+
+      _.div({class: 'external'}, 'Light DOM'),
+    ),
   )
 }
 

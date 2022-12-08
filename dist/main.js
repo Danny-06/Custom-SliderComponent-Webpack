@@ -70,29 +70,43 @@ const _ = _libs_core_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "buildElement": () => (/* binding */ buildElement),
+/* harmony export */   "buildShadowHostElement": () => (/* binding */ buildShadowHostElement),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _helpers_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
 
 
 /**
- * @typedef {(...children?: HTMLElement) => DocumentFragment} DOMMakerFunc
+ * @typedef {(...children?: HTMLElement) => DocumentFragment} DOMMakerProxyFunc
  */
 
 /**
  * @typedef {{
- *  [key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElementTagNameMap[key]
- * }} DOMMakerHTMLProperties
+ *  [key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElementTagNameMap[key]
+ * }} DOMMakerHTMLProxyProperties
+ */
+
+/**
+ * @typedef ShadowDOMOptions
+ * @property {ShadowRootInit} [init]
+ * @property {ShadowRootMode} [mode=open]
+ * @property {HTMLElement[]} [children]
  */
 
 /**
 * @typedef {{
-*  [key: string]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElement
-* }} DOMMakerProperties
+*  $: {[key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, shadowDOMOptions: ShadowDOMOptions, ...children: HTMLElement[]) => HTMLElementTagNameMap[key]}
+* }} DOMMakerShadowDOMHTMLProxyProperties
 */
 
 /**
- * @typedef {DOMMakerFunc & DOMMakerHTMLProperties & DOMMakerProperties} DOMMakerProxy
+* @typedef {{
+*  [key: string]: (properties?: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElement
+* }} DOMMakerProxyProperties
+*/
+
+/**
+ * @typedef {DOMMakerProxyFunc & DOMMakerHTMLProxyProperties & DOMMakerShadowDOMHTMLProxyProperties & DOMMakerProxyProperties} DOMMakerProxy
  */
 
 /**
@@ -151,9 +165,26 @@ const DOMMaker = new Proxy(function() {}, {
    * @param {*} target 
    * @param {T extends keyof HTMLElementTagNameMap ? T : HTMLElement} property 
    * @param {*} receiver 
-   * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[T]}
+   * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElementTagNameMap[T]}
    */
   get: (target, property, receiver) => {
+    switch (property) {
+      case '$':
+        return new Proxy(function() {}, {
+          get: (target, innerProperty, receiver) => {
+            return function(properties, shadowDOMOptions, ...children) {
+              const element = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.createElement)(innerProperty)
+
+              buildShadowHostElement(element, properties, shadowDOMOptions, ...children)
+
+              return element
+            }
+          }
+        })
+
+      default:
+    }
+
     return function(properties, ...children) {
       const element = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.createElement)(property)
 
@@ -171,7 +202,7 @@ const DOMMaker = new Proxy(function() {}, {
  * @template T
  * @param {T extends HTMLElement ? T : never} element 
  * @param {FunctionalDOMProperties=} properties 
- * @param  {...HTMLElement=} children 
+ * @param  {...HTMLElement} children 
  * @returns {T}
  * 
  * It's similar to `DOMMaker.property()` but instead of  
@@ -214,6 +245,33 @@ function buildElement(element, properties = {}, ...children) {
   }
 
   (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setChildren)(element, children)
+
+  return element
+}
+
+/**
+ * @template T
+ * @param {T extends HTMLElement ? T : never} element 
+ * @param {FunctionalDOMProperties=} properties 
+ * @param {ShadowDOMOptions=} shadowDOMOptions
+ * @param  {...HTMLElement} children 
+ * @returns {T}
+ * 
+ * It's similar to `buildElement` but it also accepts
+ * an extra parameter to configure the `Shadow DOM`
+ */
+function buildShadowHostElement(element, properties = {}, shadowDOMOptions = {}, ...children) {
+  buildElement(element, properties, ...children)
+
+  const shadowRootInit = {mode: 'open', ...shadowDOMOptions.init}
+
+  if (shadowDOMOptions.mode) {
+    shadowRootInit.mode = shadowDOMOptions.mode
+  }
+
+  const shadowRoot = element.attachShadow(shadowRootInit)
+
+  shadowRoot.append(...shadowDOMOptions.children)
 
   return element
 }
@@ -973,6 +1031,18 @@ function WrapperComponent() {
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleReversedBtn, {class: 'toggle-reversed'}, 'Toggle Reversed'),
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
+    ),
+    _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].$.div({class: 'shadow-dom'}, {
+        children: [
+          _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'internal'}, 'Shadow DOM'),
+          _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'wrapper-slot', style: {display: 'flex', columnGap: '1rem'}},
+            'Slot',
+            _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].slot()
+          ),
+        ]
+      },
+
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'external'}, 'Light DOM'),
     ),
   )
 }

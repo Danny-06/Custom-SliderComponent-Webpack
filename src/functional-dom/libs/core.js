@@ -1,23 +1,36 @@
 import { createElement, setChildren, setClasses, setStyleProperties } from './helpers.js'
 
 /**
- * @typedef {(...children?: HTMLElement) => DocumentFragment} DOMMakerFunc
+ * @typedef {(...children?: HTMLElement) => DocumentFragment} DOMMakerProxyFunc
  */
 
 /**
  * @typedef {{
- *  [key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElementTagNameMap[key]
- * }} DOMMakerHTMLProperties
+ *  [key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElementTagNameMap[key]
+ * }} DOMMakerHTMLProxyProperties
+ */
+
+/**
+ * @typedef ShadowDOMOptions
+ * @property {ShadowRootInit} [init]
+ * @property {ShadowRootMode} [mode=open]
+ * @property {HTMLElement[]} [children]
  */
 
 /**
 * @typedef {{
-*  [key: string]: (properties?: FunctionalDOMProperties, ...children?: HTMLElement) => HTMLElement
-* }} DOMMakerProperties
+*  $: {[key in keyof HTMLElementTagNameMap]: (properties?: FunctionalDOMProperties, shadowDOMOptions: ShadowDOMOptions, ...children: HTMLElement[]) => HTMLElementTagNameMap[key]}
+* }} DOMMakerShadowDOMHTMLProxyProperties
 */
 
 /**
- * @typedef {DOMMakerFunc & DOMMakerHTMLProperties & DOMMakerProperties} DOMMakerProxy
+* @typedef {{
+*  [key: string]: (properties?: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElement
+* }} DOMMakerProxyProperties
+*/
+
+/**
+ * @typedef {DOMMakerProxyFunc & DOMMakerHTMLProxyProperties & DOMMakerShadowDOMHTMLProxyProperties & DOMMakerProxyProperties} DOMMakerProxy
  */
 
 /**
@@ -76,9 +89,26 @@ const DOMMaker = new Proxy(function() {}, {
    * @param {*} target 
    * @param {T extends keyof HTMLElementTagNameMap ? T : HTMLElement} property 
    * @param {*} receiver 
-   * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement) => HTMLElementTagNameMap[T]}
+   * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElementTagNameMap[T]}
    */
   get: (target, property, receiver) => {
+    switch (property) {
+      case '$':
+        return new Proxy(function() {}, {
+          get: (target, innerProperty, receiver) => {
+            return function(properties, shadowDOMOptions, ...children) {
+              const element = createElement(innerProperty)
+
+              buildShadowHostElement(element, properties, shadowDOMOptions, ...children)
+
+              return element
+            }
+          }
+        })
+
+      default:
+    }
+
     return function(properties, ...children) {
       const element = createElement(property)
 
@@ -96,7 +126,7 @@ export default DOMMaker
  * @template T
  * @param {T extends HTMLElement ? T : never} element 
  * @param {FunctionalDOMProperties=} properties 
- * @param  {...HTMLElement=} children 
+ * @param  {...HTMLElement} children 
  * @returns {T}
  * 
  * It's similar to `DOMMaker.property()` but instead of  
@@ -139,6 +169,33 @@ export function buildElement(element, properties = {}, ...children) {
   }
 
   setChildren(element, children)
+
+  return element
+}
+
+/**
+ * @template T
+ * @param {T extends HTMLElement ? T : never} element 
+ * @param {FunctionalDOMProperties=} properties 
+ * @param {ShadowDOMOptions=} shadowDOMOptions
+ * @param  {...HTMLElement} children 
+ * @returns {T}
+ * 
+ * It's similar to `buildElement` but it also accepts
+ * an extra parameter to configure the `Shadow DOM`
+ */
+export function buildShadowHostElement(element, properties = {}, shadowDOMOptions = {}, ...children) {
+  buildElement(element, properties, ...children)
+
+  const shadowRootInit = {mode: 'open', ...shadowDOMOptions.init}
+
+  if (shadowDOMOptions.mode) {
+    shadowRootInit.mode = shadowDOMOptions.mode
+  }
+
+  const shadowRoot = element.attachShadow(shadowRootInit)
+
+  shadowRoot.append(...shadowDOMOptions.children)
 
   return element
 }
