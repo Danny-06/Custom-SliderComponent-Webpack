@@ -10,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 
-  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 300px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  margin: auto;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n  row-gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #290;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: rgb(52, 181, 16);\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: rgb(31, 111, 9);\r\n}\r\n"
+  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 300px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  margin: auto;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n  row-gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #174d72;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: #216c9f;\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: #082437;\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
   stylesheet.replace(css)
@@ -69,6 +69,7 @@ const _ = _libs_core_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NSMaker": () => (/* binding */ NSMaker),
 /* harmony export */   "buildElement": () => (/* binding */ buildElement),
 /* harmony export */   "buildShadowHostElement": () => (/* binding */ buildShadowHostElement),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -277,6 +278,82 @@ function buildShadowHostElement(element, properties = {}, shadowDOMOptions = {},
 }
 
 
+
+
+// TO DO
+
+/**
+ * @template T
+ * @template R
+ * @typedef {{
+ *  [key in keyof SVGElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children: T[]) => R extends 'http://www.w3.org/2000/svg' ? SVGElementTagNameMap[key] : Element
+ * }} NSMakerProxySVGProperties
+ */
+
+/**
+ * @template T
+ * @template R
+ * @typedef {{
+ *  [key: string]: (properties?: FunctionalDOMProperties, ...children: T[]) => R extends 'http://www.w3.org/2000/svg' ? SVGElement : T
+ * }} NSMakerProxyStringProperties
+ */
+
+/**
+ * @template T
+ * @template R
+ * @typedef {NSMakerProxySVGProperties<T, R> & NSMakerProxyStringProperties<T, R>} NSMakerProxyProperties
+ */
+
+/**
+ * @typedef {<T extends 'http://www.w3.org/2000/svg' | string>(namespace: T) => T extends 'http://www.w3.org/2000/svg' ? NSMakerProxyProperties<SVGElement, T> : NSMakerProxyProperties<Element, T>} NSMaker
+ */
+
+/**
+ * @type {NSMaker}
+ * 
+ * Function that returns a Proxy object to create elements of a specific namespace.  
+ * It is similar to `DOMMaker` in behavior but just limited to other elements that are not HTML.  
+ * 
+ * @example
+ * const SVGMaker = NSMaker('http://www.w3.org/2000/svg')
+ * 
+ * const svg = SVGMaker.svg()
+ * const rect = SVGMaker.rect()
+ * 
+ * const CustomMaker = NSMaker('my-namespace')
+ * 
+ * const customElement = NSMaker.customelement()
+ * 
+ */
+const NSMaker = namespace => {
+  return new Proxy(function() {}, {
+
+    /**
+     * @template T
+     * @param {*} target 
+     * @param {T extends keyof HTMLElementTagNameMap ? T : HTMLElement} property 
+     * @param {*} receiver 
+     * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElementTagNameMap[T]}
+     */
+    get: (target, property, receiver) => {  
+      return function(properties, ...children) {
+        const element = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.createElementNS)(property, namespace)
+  
+        buildElement(element, properties, ...children)
+  
+        return element
+      }
+    }
+  
+  })
+}
+
+
+function buildElementNS() {
+
+}
+
+
 /***/ }),
 /* 5 */
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
@@ -284,6 +361,7 @@ function buildShadowHostElement(element, properties = {}, shadowDOMOptions = {},
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createElement": () => (/* binding */ createElement),
+/* harmony export */   "createElementNS": () => (/* binding */ createElementNS),
 /* harmony export */   "setChildren": () => (/* binding */ setChildren),
 /* harmony export */   "setClasses": () => (/* binding */ setClasses),
 /* harmony export */   "setStyleProperties": () => (/* binding */ setStyleProperties)
@@ -299,6 +377,18 @@ function createElement(tagName) {
   return element
 }
 
+/**
+ * @template T
+ * @template {'http://www.w3.org/2000/svg' | string} R
+ * @param {T extends keyof SVGElementTagNameMap ? T : string} tagName 
+ * @param {R} namespace
+ * @returns {namespace extends 'http://www.w3.org/2000/svg' ? T extends keyof SVGElementTagNameMap ? SVGElementTagNameMap[T] : SVGElement : Element}
+ */
+function createElementNS(tagName, namespace) {
+  const element = document.createElementNS(namespace, tagName)
+
+  return element
+}
 
 /**
  * 

@@ -79,15 +79,15 @@ button:active {
 
 button.previous,
 button.next {
-  background-color: #290;
+  background-color: #174d72;
 }
 
 button.previous:hover,
 button.next:hover {
-  background-color: rgb(52, 181, 16);
+  background-color: #216c9f;
 }
 
 button.previous:active,
 button.next:active {
-  background-color: rgb(31, 111, 9);
+  background-color: #082437;
 }
