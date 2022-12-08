@@ -4,6 +4,11 @@ module.exports = function htmlDocumentFragmentLoader(content, map, meta) {
   function queryDeclarativeTemplatesShadowDOM(documentFragment) {
     const templates = [...documentFragment.querySelectorAll('template[shadowroot]:first-child')]
   
+    templates.forEach(template => {
+      const innerTemplates = queryDeclarativeTemplatesShadowDOM(template.content)
+      templates.push(...innerTemplates)
+    })
+  
     return templates
   }
 
