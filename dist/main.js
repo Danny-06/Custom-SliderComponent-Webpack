@@ -10,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 
-  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 300px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  margin: auto;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #290;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: rgb(52, 181, 16);\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: rgb(31, 111, 9);\r\n}\r\n"
+  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 300px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  margin: auto;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n  row-gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #290;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: rgb(52, 181, 16);\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: rgb(31, 111, 9);\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
   stylesheet.replace(css)
@@ -966,14 +966,14 @@ function WrapperComponent() {
     ),
     _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'buttons'},
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(previousBtn, {class: 'previous', style: {marginRight: 'auto'}}, 'Previous'),
-
+      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(nextBtn, {class: 'next', style: {marginLeft: 'auto'}}, 'Next'),
+    ),
+    _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'buttons'},
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleDirectionBtn, {class: 'toggle-direction'}, 'Toggle Direction'),
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleReversedBtn, {class: 'toggle-reversed'}, 'Toggle Reversed'),
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
-
-      (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(nextBtn, {class: 'next', style: {marginLeft: 'auto'}}, 'Next'),
-    )
+    ),
   )
 }
 

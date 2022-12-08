@@ -50,14 +50,14 @@ function WrapperComponent() {
     ),
     _.div({class: 'buttons'},
       $(previousBtn, {class: 'previous', style: {marginRight: 'auto'}}, 'Previous'),
-
+      $(nextBtn, {class: 'next', style: {marginLeft: 'auto'}}, 'Next'),
+    ),
+    _.div({class: 'buttons'},
       $(toggleDirectionBtn, {class: 'toggle-direction'}, 'Toggle Direction'),
       $(toggleReversedBtn, {class: 'toggle-reversed'}, 'Toggle Reversed'),
       $(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
       $(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
-
-      $(nextBtn, {class: 'next', style: {marginLeft: 'auto'}}, 'Next'),
-    )
+    ),
   )
 }
 
