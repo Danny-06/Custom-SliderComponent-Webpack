@@ -41,7 +41,9 @@ function WrapperComponent() {
     domSlider.classList.toggle('overflow-visible')
   })
 
-  return _.div({class: 'wrapper-component'},
+  return _.$.div({class: 'wrapper-component'},
+    {children: [_.slot()]},
+
     $(domSlider, {class: 'component'},
       _.div({class: 'box -b1'}, 0),
       _.div({class: 'box -b2'}, 1),
@@ -57,18 +59,6 @@ function WrapperComponent() {
       $(toggleReversedBtn, {class: 'toggle-reversed'}, 'Toggle Reversed'),
       $(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
       $(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
-    ),
-    _.$.div({class: 'shadow-dom'}, {
-        children: [
-          _.div({class: 'internal'}, 'Shadow DOM'),
-          _.div({class: 'wrapper-slot', style: {display: 'flex', columnGap: '1rem'}},
-            'Slot',
-            _.slot()
-          ),
-        ]
-      },
-
-      _.div({class: 'external'}, 'Light DOM'),
     ),
   )
 }

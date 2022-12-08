@@ -1015,7 +1015,9 @@ function WrapperComponent() {
     domSlider.classList.toggle('overflow-visible')
   })
 
-  return _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'wrapper-component'},
+  return _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].$.div({class: 'wrapper-component'},
+    {children: [_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].slot()]},
+
     (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(domSlider, {class: 'component'},
       _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b1'}, 0),
       _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b2'}, 1),
@@ -1031,18 +1033,6 @@ function WrapperComponent() {
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleReversedBtn, {class: 'toggle-reversed'}, 'Toggle Reversed'),
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleCyclicBtn, {class: 'toggle-cyclic'}, 'Toggle Cyclic'),
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
-    ),
-    _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].$.div({class: 'shadow-dom'}, {
-        children: [
-          _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'internal'}, 'Shadow DOM'),
-          _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'wrapper-slot', style: {display: 'flex', columnGap: '1rem'}},
-            'Slot',
-            _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].slot()
-          ),
-        ]
-      },
-
-      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'external'}, 'Light DOM'),
     ),
   )
 }
