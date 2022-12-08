@@ -231,9 +231,6 @@ export function buildShadowHostElement(element, properties = {}, shadowDOMOption
  * @typedef {<T extends 'http://www.w3.org/2000/svg' | string>(namespace: T) => T extends 'http://www.w3.org/2000/svg' ? NSMakerProxyProperties<SVGElement, T> : NSMakerProxyProperties<Element, T>} NSMaker
  */
 
-NSMaker('http://www.w3.org/2000/svg').path()
-NSMaker('').path()
-
 /**
  * @type {NSMaker}
  * 
