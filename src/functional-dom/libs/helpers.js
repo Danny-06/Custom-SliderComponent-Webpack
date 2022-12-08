@@ -9,6 +9,18 @@ export function createElement(tagName) {
   return element
 }
 
+/**
+ * @template T
+ * @template {'http://www.w3.org/2000/svg' | string} R
+ * @param {T extends keyof SVGElementTagNameMap ? T : string} tagName 
+ * @param {R} namespace
+ * @returns {namespace extends 'http://www.w3.org/2000/svg' ? T extends keyof SVGElementTagNameMap ? SVGElementTagNameMap[T] : SVGElement : Element}
+ */
+export function createElementNS(tagName, namespace) {
+  const element = document.createElementNS(namespace, tagName)
+
+  return element
+}
 
 /**
  * 

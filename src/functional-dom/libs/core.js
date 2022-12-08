@@ -1,4 +1,4 @@
-import { createElement, setChildren, setClasses, setStyleProperties } from './helpers.js'
+import { createElement, createElementNS, setChildren, setClasses, setStyleProperties } from './helpers.js'
 
 /**
  * @typedef {(...children?: HTMLElement) => DocumentFragment} DOMMakerProxyFunc
@@ -198,4 +198,78 @@ export function buildShadowHostElement(element, properties = {}, shadowDOMOption
   shadowRoot.append(...shadowDOMOptions.children)
 
   return element
+}
+
+
+
+
+// TO DO
+
+/**
+ * @template T
+ * @template R
+ * @typedef {{
+ *  [key in keyof SVGElementTagNameMap]: (properties?: FunctionalDOMProperties, ...children: T[]) => R extends 'http://www.w3.org/2000/svg' ? SVGElementTagNameMap[key] : Element
+ * }} NSMakerProxySVGProperties
+ */
+
+/**
+ * @template T
+ * @template R
+ * @typedef {{
+ *  [key: string]: (properties?: FunctionalDOMProperties, ...children: T[]) => R extends 'http://www.w3.org/2000/svg' ? SVGElement : T
+ * }} NSMakerProxyStringProperties
+ */
+
+/**
+ * @template T
+ * @template R
+ * @typedef {NSMakerProxySVGProperties<T, R> & NSMakerProxyStringProperties<T, R>} NSMakerProxyProperties
+ */
+
+/**
+ * @typedef {<T extends 'http://www.w3.org/2000/svg' | string>(namespace: T) => T extends 'http://www.w3.org/2000/svg' ? NSMakerProxyProperties<SVGElement, T> : NSMakerProxyProperties<Element, T>} NSMaker
+ */
+
+NSMaker('http://www.w3.org/2000/svg').path()
+NSMaker('').path()
+
+/**
+ * @type {NSMaker}
+ * 
+ * Function that returns a Proxy object to create elements of a specific namespace.  
+ * It is similar to `DOMMaker` in behavior but just limited to other elements that are not HTML.  
+ * 
+ * @example
+ * const SVGMaker = NSMaker('http://www.w3.org/2000/svg')
+ * 
+ * const svg = SVGMaker.svg()
+ * const rect = SVGMaker.rect()
+ * 
+ * const CustomMaker = NSMaker('my-namespace')
+ * 
+ * const customElement = NSMaker.customelement()
+ * 
+ */
+export const NSMaker = namespace => {
+  return new Proxy(function() {}, {
+
+    /**
+     * @template T
+     * @param {*} target 
+     * @param {T extends keyof HTMLElementTagNameMap ? T : HTMLElement} property 
+     * @param {*} receiver 
+     * @returns {(properties: FunctionalDOMProperties, ...children: HTMLElement[]) => HTMLElementTagNameMap[T]}
+     */
+    get: (target, property, receiver) => {  
+      return function(properties, ...children) {
+        const element = createElementNS(property, namespace)
+  
+        buildElement(element, properties, ...children)
+  
+        return element
+      }
+    }
+  
+  })
 }
