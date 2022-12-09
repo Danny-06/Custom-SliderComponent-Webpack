@@ -136,6 +136,8 @@ export default DOMMaker
 export function buildElement(element, properties = {}, ...children) {
   const {id, class: classes, dataset, attributes, style} = properties
 
+  const tp = trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e })
+
   if (id) {
     element.id = id
   }
@@ -284,6 +286,8 @@ export const NSMaker = namespace => {
  */
 function buildElementNS(element, properties = {}, ...children) {
   const {id, class: classes, dataset, attributes, style} = properties
+
+  const tp = trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e })
 
   if (id) {
     element.id = id
