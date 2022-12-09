@@ -10,8 +10,8 @@ export function createElement(tagName) {
 }
 
 /**
- * @template T
- * @template {'http://www.w3.org/2000/svg' | string} R
+ * @template {string} T
+ * @template {string | 'http://www.w3.org/2000/svg'} R
  * @param {T extends keyof SVGElementTagNameMap ? T : string} tagName 
  * @param {R} namespace
  * @returns {namespace extends 'http://www.w3.org/2000/svg' ? T extends keyof SVGElementTagNameMap ? SVGElementTagNameMap[T] : SVGElement : Element}

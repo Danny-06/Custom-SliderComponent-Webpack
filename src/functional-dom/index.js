@@ -1,4 +1,4 @@
-import DOMMaker, { buildElement } from './libs/core.js'
+import DOMMaker, { buildElement, NSMaker } from './libs/core.js'
 import { createWebComponent } from './libs/create-web-component.js'
 
 
@@ -8,5 +8,6 @@ export default _
 
 export {
   buildElement,
-  createWebComponent
+  createWebComponent,
+  NSMaker,
 }

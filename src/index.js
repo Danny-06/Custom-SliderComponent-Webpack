@@ -66,6 +66,8 @@ function WrapperComponent() {
 
 const appContent = document.querySelector('#app-content')
 
-const render = WrapperComponent()
+const render = _(
+  WrapperComponent(),
+)
 
 appContent.append(render)

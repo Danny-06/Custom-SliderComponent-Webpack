@@ -262,11 +262,62 @@ export const NSMaker = namespace => {
       return function(properties, ...children) {
         const element = createElementNS(property, namespace)
   
-        buildElement(element, properties, ...children)
+        buildElementNS(element, properties, ...children)
   
         return element
       }
     }
   
   })
+}
+
+/**
+ * @template T
+ * @param {T extends Element ? T : never} element 
+ * @param {FunctionalDOMProperties=} properties 
+ * @param  {...Element} children 
+ * @returns {T}
+ * 
+ * It's similar to `DOMMaker.property()` but instead of  
+ * creating an element it just takes an `element` and applies  
+ * the `properties` and the `children` to it.
+ */
+function buildElementNS(element, properties = {}, ...children) {
+  const {id, class: classes, dataset, attributes, style} = properties
+
+  if (id) {
+    element.id = id
+  }
+
+  if (classes) {
+    setClasses(element, classes)
+  }
+
+  if (dataset) {
+    for (const [property, value] of Object.entries(dataset ?? {})) {
+      if (value === undefined) continue
+
+      element.dataset[property] = value
+    }
+  }
+
+  for (const [property, value] of Object.entries(attributes ?? {})) {
+    if (value === undefined) continue
+
+    if (['src', 'href'].includes(property)) {
+      element.setAttribute(property, tp.createScriptURL(value))
+
+      continue
+    }
+
+    element.setAttribute(property, value)
+  }
+
+  if (style) {
+    setStyleProperties(element.style, style)
+  }
+
+  setChildren(element, children)
+
+  return element
 }
