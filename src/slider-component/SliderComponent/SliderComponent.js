@@ -132,7 +132,7 @@ class SliderInterface {
       throw new TypeError(`Value must be a number`)
     }
 
-    if (this._cyclic && this._isTransitioning && this._isCurrentIndexStartOrEnd) {
+    if (this._cyclic && this.length > 2 && this._isTransitioning && this._isCurrentIndexStartOrEnd) {
       await this._waitForTransformTransitionEnd()
     }
 
@@ -223,6 +223,11 @@ class SliderInterface {
   handleCyclicTransitionStart(value) {
     const isEndToStart = this._isCurrentIndexEnd && this.isValueStart(value)
     const isStartToEnd = this._isCurrentIndexStart && this.isValueEnd(value)
+
+    if (this.length <= 2) {
+      this.position = value
+      return
+    }
 
     if (isEndToStart) {
       this.removeTransition()
