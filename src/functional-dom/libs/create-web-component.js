@@ -24,7 +24,7 @@ const mutationObserver = new MutationObserver(mutations => {
  * For that reason, is recommended to replace them with properties that starts with an underscore.  
  * 
  * @template T
- * @param {T.prototype extends HTMLElement ? T : never} classComponent 
+ * @param {T extends typeof HTMLElement ? T : never} classComponent 
  * @param {HTMLElement} [elementToApply=null]
  * @returns {InstanceType<T>}
  * 
