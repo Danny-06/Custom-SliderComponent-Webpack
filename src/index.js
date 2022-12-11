@@ -1,7 +1,7 @@
 import mainStyleSheet from './styles/main.css'
 import { Slider } from './slider-component/index.js'
 import _, {buildElement as $} from './functional-dom/index.js'
-
+import { CoolBorder } from './CoolBorder/index.js'
 
 document.adoptedStyleSheets = [mainStyleSheet]
 
@@ -41,9 +41,7 @@ function WrapperComponent() {
     domSlider.classList.toggle('overflow-visible')
   })
 
-  return _.$.div({class: 'wrapper-component'},
-    {children: [_.slot()]},
-
+  const content = _.div({class: 'wrapper-component'},
     $(domSlider, {class: 'component'},
       _.div({class: 'box -b1'}, 0),
       _.div({class: 'box -b2'}, 1),
@@ -61,7 +59,11 @@ function WrapperComponent() {
       $(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
     ),
   )
+
+  return CoolBorder({class: 'wrapper-border'}, content)
 }
+
+
 
 
 const appContent = document.querySelector('#app-content')

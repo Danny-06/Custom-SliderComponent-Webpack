@@ -8,14 +8,19 @@
   overflow: hidden;
 }
 
+.wrapper-border {
+  width: 100%;
+  margin: auto;
+}
+
 .wrapper-component {
-  width: 300px;
+  width: 400px;
 
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
 
-  margin: auto;
+  padding: 1rem;
 }
 
 .box {
