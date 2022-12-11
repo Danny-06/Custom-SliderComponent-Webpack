@@ -197,7 +197,7 @@ export function buildShadowHostElement(element, properties = {}, shadowDOMOption
 
   const shadowRoot = element.attachShadow(shadowRootInit)
 
-  shadowRoot.append(...shadowDOMOptions.children)
+  shadowRoot.append(...shadowDOMOptions.children ?? [])
 
   return element
 }
