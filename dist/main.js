@@ -10,7 +10,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 
-  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 300px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  margin: auto;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n  row-gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #174d72;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: #216c9f;\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: #082437;\r\n}\r\n"
+  const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-border {\r\n  width: 100%;\r\n  margin: auto;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 400px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  padding: 1rem;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n  row-gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #174d72;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: #216c9f;\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: #082437;\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
   stylesheet.replace(css)
@@ -46,6 +46,7 @@ function Slider() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NSMaker": () => (/* reexport safe */ _libs_core_js__WEBPACK_IMPORTED_MODULE_0__.NSMaker),
 /* harmony export */   "buildElement": () => (/* reexport safe */ _libs_core_js__WEBPACK_IMPORTED_MODULE_0__.buildElement),
 /* harmony export */   "createWebComponent": () => (/* reexport safe */ _libs_create_web_component_js__WEBPACK_IMPORTED_MODULE_1__.createWebComponent),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -213,6 +214,8 @@ const DOMMaker = new Proxy(function() {}, {
 function buildElement(element, properties = {}, ...children) {
   const {id, class: classes, dataset, attributes, style} = properties
 
+  const tp = trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e })
+
   if (id) {
     element.id = id
   }
@@ -272,7 +275,7 @@ function buildShadowHostElement(element, properties = {}, shadowDOMOptions = {},
 
   const shadowRoot = element.attachShadow(shadowRootInit)
 
-  shadowRoot.append(...shadowDOMOptions.children)
+  shadowRoot.append(...shadowDOMOptions.children ?? [])
 
   return element
 }
@@ -339,7 +342,7 @@ const NSMaker = namespace => {
       return function(properties, ...children) {
         const element = (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.createElementNS)(property, namespace)
   
-        buildElement(element, properties, ...children)
+        buildElementNS(element, properties, ...children)
   
         return element
       }
@@ -348,9 +351,57 @@ const NSMaker = namespace => {
   })
 }
 
+/**
+ * @template T
+ * @param {T extends Element ? T : never} element 
+ * @param {FunctionalDOMProperties=} properties 
+ * @param  {...Element} children 
+ * @returns {T}
+ * 
+ * It's similar to `DOMMaker.property()` but instead of  
+ * creating an element it just takes an `element` and applies  
+ * the `properties` and the `children` to it.
+ */
+function buildElementNS(element, properties = {}, ...children) {
+  const {id, class: classes, dataset, attributes, style} = properties
 
-function buildElementNS() {
+  const tp = trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e })
 
+  if (id) {
+    element.id = id
+  }
+
+  if (classes) {
+    (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setClasses)(element, classes)
+  }
+
+  if (dataset) {
+    for (const [property, value] of Object.entries(dataset ?? {})) {
+      if (value === undefined) continue
+
+      element.dataset[property] = value
+    }
+  }
+
+  for (const [property, value] of Object.entries(attributes ?? {})) {
+    if (value === undefined) continue
+
+    if (['src', 'href'].includes(property)) {
+      element.setAttribute(property, tp.createScriptURL(value))
+
+      continue
+    }
+
+    element.setAttribute(property, value)
+  }
+
+  if (style) {
+    (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setStyleProperties)(element.style, style)
+  }
+
+  (0,_helpers_js__WEBPACK_IMPORTED_MODULE_0__.setChildren)(element, children)
+
+  return element
 }
 
 
@@ -378,8 +429,8 @@ function createElement(tagName) {
 }
 
 /**
- * @template T
- * @template {'http://www.w3.org/2000/svg' | string} R
+ * @template {string} T
+ * @template {string | 'http://www.w3.org/2000/svg'} R
  * @param {T extends keyof SVGElementTagNameMap ? T : string} tagName 
  * @param {R} namespace
  * @returns {namespace extends 'http://www.w3.org/2000/svg' ? T extends keyof SVGElementTagNameMap ? SVGElementTagNameMap[T] : SVGElement : Element}
@@ -484,7 +535,7 @@ const mutationObserver = new MutationObserver(mutations => {
  * For that reason, is recommended to replace them with properties that starts with an underscore.  
  * 
  * @template T
- * @param {T.prototype extends HTMLElement ? T : never} classComponent 
+ * @param {T extends typeof HTMLElement ? T : never} classComponent 
  * @param {HTMLElement} [elementToApply=null]
  * @returns {InstanceType<T>}
  * 
@@ -679,7 +730,7 @@ class SliderInterface {
       throw new TypeError(`Value must be a number`)
     }
 
-    if (this._cyclic && this._isTransitioning && this._isCurrentIndexStartOrEnd) {
+    if (this._cyclic && this.length > 2 && this._isTransitioning && this._isCurrentIndexStartOrEnd) {
       await this._waitForTransformTransitionEnd()
     }
 
@@ -770,6 +821,11 @@ class SliderInterface {
   handleCyclicTransitionStart(value) {
     const isEndToStart = this._isCurrentIndexEnd && this.isValueStart(value)
     const isStartToEnd = this._isCurrentIndexStart && this.isValueEnd(value)
+
+    if (this.length <= 2) {
+      this.position = value
+      return
+    }
 
     if (isEndToStart) {
       this.removeTransition()
@@ -1003,6 +1059,59 @@ __webpack_require__.r(__webpack_exports__);
   /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (stylesheet);
   
 
+/***/ }),
+/* 10 */
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CoolBorder": () => (/* binding */ CoolBorder)
+/* harmony export */ });
+/* harmony import */ var _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+
+
+
+function CoolBorder(options, ...children) {
+  const wrapper = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].$.div()
+
+  wrapper.shadowRoot.adoptedStyleSheets = [_main_css__WEBPACK_IMPORTED_MODULE_1__["default"]]
+
+  const shadowRootContent = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div({class: 'my-wrapper -wrapper-border-effect _grid-overlay_'}, 
+    _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div({class: 'my-content'},
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].slot(),
+    ),
+    _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div({class: 'border-effect'},
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div({class: 'border'}),
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div({class: 'border'}),
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div({class: 'border'}),
+      _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].div({class: 'border'}),
+    )
+  )
+
+  wrapper.shadowRoot.append(shadowRootContent)
+
+  return (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_0__.buildElement)(wrapper, options, ...children)
+}
+
+
+/***/ }),
+/* 11 */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+
+  const css = ":host {\r\n  box-sizing: border-box;\r\n}\r\n\r\n*:not(:host),\r\n*::before,\r\n*::after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n.my-wrapper.-wrapper-border-effect {\r\n  --border-width: 4px;\r\n  --horizontal-length: 100px;\r\n  --vertical-length: 100px;\r\n}\r\n\r\n.my-content {\r\n  display: grid;\r\n  place-items: center;\r\n}\r\n\r\n/* Utility Classes Start */\r\n\r\n._grid-overlay_ {\r\n  display: grid;\r\n  grid-template-columns: 1fr;\r\n  grid-template-rows: 1fr;\r\n  grid-template-areas: 'overlay';\r\n}\r\n\r\n._grid-overlay_ > * {\r\n  grid-area: overlay;\r\n  z-index: 0;\r\n}\r\n\r\n/* Utility Classes End */\r\n\r\n\r\n/* Border Effect */\r\n\r\n:host {\r\n  --border-width: 2px;\r\n  --horizontal-length: 100px;\r\n  --vertical-length: 100px;\r\n}\r\n\r\n.-wrapper-border-effect {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.wrapper-border-effect > :first-child {\r\n  border-style: solid;\r\n  border-color: transparent;\r\n  border-width: var(--border-width);\r\n}\r\n\r\n\r\n\r\n.border-effect {\r\n  pointer-events: none;\r\n\r\n  position: relative;\r\n\r\n  --horizontal-angle: 90deg;\r\n  --horizontal-reversed-angle: 270deg;\r\n\r\n  --vertical-angle: 180deg;\r\n  --vertical-reversed-angle: 0deg;\r\n  \r\n  --vertical-clip-path: polygon(\r\n    0 0,\r\n    100% 0,\r\n    50% calc(var(--vertical-length) * 2)\r\n  );\r\n  \r\n  --vertical-clip-path-reversed: polygon(\r\n    50% calc(100% - var(--vertical-length) * 2),\r\n    100% 100%,\r\n    0% 100%\r\n  );\r\n  \r\n  --horizontal-clip-path: polygon(\r\n    0 0,\r\n    0 100%,\r\n    calc(var(--horizontal-length) * 2) 50%\r\n  );\r\n  \r\n  --horizontal-clip-path-reversed: polygon(\r\n    calc(100% - var(--horizontal-length) * 2) 50%,\r\n    100% 0,\r\n    100% 100%\r\n  );\r\n}\r\n\r\n.border-effect > .border {\r\n  position: absolute;\r\n}\r\n\r\n/* Horizontal Top */\r\n.border-effect > .border:nth-child(1) {\r\n  top: 0;\r\n  left: 0;\r\n\r\n  width: 100%;\r\n  height: var(--border-width);\r\n\r\n  background-image: linear-gradient(\r\n    var(--horizontal-angle),\r\n    #fff9,\r\n    transparent var(--horizontal-length)\r\n  );\r\n\r\n  clip-path: var(--horizontal-clip-path);\r\n}\r\n\r\n/* Vertical Left */\r\n.border-effect > .border:nth-child(2) {\r\n  top: var(--border-width);\r\n  left: 0;\r\n\r\n  width: var(--border-width);\r\n  height: calc(100% - var(--border-width));\r\n\r\n  background-image: linear-gradient(\r\n    var(--vertical-angle),\r\n    #fff9,\r\n    transparent calc(var(--vertical-length) - 2px)\r\n  );\r\n\r\n  clip-path: var(--vertical-clip-path);\r\n}\r\n\r\n/* Horizontal Bottom */\r\n.border-effect > .border:nth-child(3) {\r\n  bottom: 0;\r\n  right: 0;\r\n\r\n  width: 100%;\r\n  height: var(--border-width);\r\n\r\n  background-image: linear-gradient(\r\n    var(--horizontal-reversed-angle),\r\n    #fff9,\r\n    transparent var(--horizontal-length)\r\n  );\r\n\r\n  clip-path: var(--horizontal-clip-path-reversed);\r\n}\r\n\r\n/* Vertical Right */\r\n.border-effect > .border:nth-child(4) {\r\n  bottom: var(--border-width);\r\n  right: 0;\r\n\r\n  width: var(--border-width);\r\n  height: calc(100% - var(--border-width));\r\n\r\n  background-image: linear-gradient(\r\n    var(--vertical-reversed-angle),\r\n    #fff9,\r\n    transparent calc(var(--vertical-length) - 2px)\r\n  );\r\n\r\n  clip-path: var(--vertical-clip-path-reversed);\r\n}\r\n"
+
+  const stylesheet = new CSSStyleSheet()
+  stylesheet.replace(css)
+
+  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (stylesheet);
+  
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -1067,6 +1176,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _slider_component_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _CoolBorder_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
 
 
 
@@ -1110,9 +1220,7 @@ function WrapperComponent() {
     domSlider.classList.toggle('overflow-visible')
   })
 
-  return _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].$.div({class: 'wrapper-component'},
-    {children: [_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].slot()]},
-
+  const content = _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'wrapper-component'},
     (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(domSlider, {class: 'component'},
       _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b1'}, 0),
       _functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"].div({class: 'box -b2'}, 1),
@@ -1130,12 +1238,18 @@ function WrapperComponent() {
       (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__.buildElement)(toggleOverflowBtn, {class: 'toggle-overflow'}, 'Toggle Overflow'),
     ),
   )
+
+  return (0,_CoolBorder_index_js__WEBPACK_IMPORTED_MODULE_3__.CoolBorder)({class: 'wrapper-border'}, content)
 }
+
+
 
 
 const appContent = document.querySelector('#app-content')
 
-const render = WrapperComponent()
+const render = (0,_functional_dom_index_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  WrapperComponent(),
+)
 
 appContent.append(render)
 
