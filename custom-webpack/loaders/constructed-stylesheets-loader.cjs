@@ -4,7 +4,7 @@ module.exports = function cssAsTextLoader(content, map, meta) {
   const css = ${JSON.stringify(content)}
 
   const stylesheet = new CSSStyleSheet()
-  stylesheet.replace(css)
+  stylesheet.replaceSync(css)
 
   export default stylesheet
   `

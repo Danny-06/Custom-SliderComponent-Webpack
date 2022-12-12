@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
   const css = "@charset \"UTF-8\";\r\n\r\n#app-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper-border {\r\n  width: 100%;\r\n  margin: auto;\r\n}\r\n\r\n.wrapper-component {\r\n  width: 400px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  row-gap: 1rem;\r\n\r\n  padding: 1rem;\r\n}\r\n\r\n.box {\r\n  display: grid;\r\n  place-items: center;  \r\n}\r\n\r\n.component {\r\n  width: 100%;\r\n}\r\n\r\n.component.overflow-visible {\r\n  overflow: visible;\r\n}\r\n\r\n.component > .box {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.component > .box.-b1 {\r\n  background-color: #06f;\r\n}\r\n\r\n.component > .box.-b2 {\r\n  background-color: #609;\r\n}\r\n\r\n.component > .box.-b3 {\r\n  background-color: #290;\r\n}\r\n\r\n.component > .box.-b4 {\r\n  background-color: #aa2a2a;\r\n}\r\n\r\n.buttons {\r\n  position: relative;\r\n\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  justify-content: center;\r\n  column-gap: 0.5rem;\r\n  row-gap: 1rem;\r\n}\r\n\r\nbutton {\r\n  padding: 0.3em 0.5em;\r\n\r\n  border-radius: 0.8em;\r\n  background-color: #333;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #444;\r\n}\r\n\r\nbutton:active {\r\n  background-color: #666;\r\n}\r\n\r\nbutton.previous,\r\nbutton.next {\r\n  background-color: #174d72;\r\n}\r\n\r\nbutton.previous:hover,\r\nbutton.next:hover {\r\n  background-color: #216c9f;\r\n}\r\n\r\nbutton.previous:active,\r\nbutton.next:active {\r\n  background-color: #082437;\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
-  stylesheet.replace(css)
+  stylesheet.replaceSync(css)
 
   /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (stylesheet);
   
@@ -604,7 +604,9 @@ class SliderInterface {
   constructor(targetComponent, wrapper) {
 
     const stylesheet = targetComponent.shadowRoot.adoptedStyleSheets[0]
+    console.log(stylesheet)
     const rule = [...stylesheet.cssRules].find(rule => rule.selectorText === '.wrapper')
+
 
     Object.defineProperties(this, {
       targetComponent: {enumerable: true, value: targetComponent},
@@ -1058,7 +1060,7 @@ __webpack_require__.r(__webpack_exports__);
   const css = ":host {\r\n  box-sizing: border-box;\r\n}\r\n\r\n*:not(:host),\r\n*::before,\r\n*::after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n* {\r\n  min-width: 0;\r\n  min-height: 0;\r\n  flex-shrink: 0;\r\n}\r\n\r\n:host {\r\n  width: 100%;\r\n  aspect-ratio: 16 / 9;\r\n\r\n  overflow: hidden;\r\n}\r\n\r\n.wrapper {\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n\r\n  transition-property: transform;\r\n  transition-duration: 0.2s;\r\n}\r\n\r\n.wrapper,\r\n.wrapper.horizontal {\r\n  flex-direction: row;\r\n  transform: translateX( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.reversed,\r\n.wrapper.horizontal.reversed {\r\n  flex-direction: row-reverse;\r\n  transform: translateX( calc( 100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical {\r\n  flex-direction: column;\r\n  transform: translateY( calc( -100% * var(--position, 0)) );\r\n}\r\n\r\n.wrapper.vertical.reversed {\r\n  flex-direction: column-reverse;\r\n  transform: translateY( calc( 100% * var(--position, 0)) );\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
-  stylesheet.replace(css)
+  stylesheet.replaceSync(css)
 
   /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (stylesheet);
   
@@ -1111,7 +1113,7 @@ __webpack_require__.r(__webpack_exports__);
   const css = ":host {\r\n  box-sizing: border-box;\r\n}\r\n\r\n*:not(:host),\r\n*::before,\r\n*::after {\r\n  box-sizing: inherit;\r\n}\r\n\r\n.my-wrapper.-wrapper-border-effect {\r\n  --border-width: 4px;\r\n  --horizontal-length: 100px;\r\n  --vertical-length: 100px;\r\n}\r\n\r\n.my-content {\r\n  display: grid;\r\n  place-items: center;\r\n}\r\n\r\n/* Utility Classes Start */\r\n\r\n._grid-overlay_ {\r\n  display: grid;\r\n  grid-template-columns: 1fr;\r\n  grid-template-rows: 1fr;\r\n  grid-template-areas: 'overlay';\r\n}\r\n\r\n._grid-overlay_ > * {\r\n  grid-area: overlay;\r\n  z-index: 0;\r\n}\r\n\r\n/* Utility Classes End */\r\n\r\n\r\n/* Border Effect */\r\n\r\n:host {\r\n  --border-width: 2px;\r\n  --horizontal-length: 100px;\r\n  --vertical-length: 100px;\r\n}\r\n\r\n.-wrapper-border-effect {\r\n  width: 100%;\r\n  height: 100%;\r\n}\r\n\r\n.wrapper-border-effect > :first-child {\r\n  border-style: solid;\r\n  border-color: transparent;\r\n  border-width: var(--border-width);\r\n}\r\n\r\n\r\n\r\n.border-effect {\r\n  pointer-events: none;\r\n\r\n  position: relative;\r\n\r\n  --horizontal-angle: 90deg;\r\n  --horizontal-reversed-angle: 270deg;\r\n\r\n  --vertical-angle: 180deg;\r\n  --vertical-reversed-angle: 0deg;\r\n  \r\n  --vertical-clip-path: polygon(\r\n    0 0,\r\n    100% 0,\r\n    50% calc(var(--vertical-length) * 2)\r\n  );\r\n  \r\n  --vertical-clip-path-reversed: polygon(\r\n    50% calc(100% - var(--vertical-length) * 2),\r\n    100% 100%,\r\n    0% 100%\r\n  );\r\n  \r\n  --horizontal-clip-path: polygon(\r\n    0 0,\r\n    0 100%,\r\n    calc(var(--horizontal-length) * 2) 50%\r\n  );\r\n  \r\n  --horizontal-clip-path-reversed: polygon(\r\n    calc(100% - var(--horizontal-length) * 2) 50%,\r\n    100% 0,\r\n    100% 100%\r\n  );\r\n}\r\n\r\n.border-effect > .border {\r\n  position: absolute;\r\n}\r\n\r\n/* Horizontal Top */\r\n.border-effect > .border:nth-child(1) {\r\n  top: 0;\r\n  left: 0;\r\n\r\n  width: 100%;\r\n  height: var(--border-width);\r\n\r\n  background-image: linear-gradient(\r\n    var(--horizontal-angle),\r\n    #fff9,\r\n    transparent var(--horizontal-length)\r\n  );\r\n\r\n  clip-path: var(--horizontal-clip-path);\r\n}\r\n\r\n/* Vertical Left */\r\n.border-effect > .border:nth-child(2) {\r\n  top: var(--border-width);\r\n  left: 0;\r\n\r\n  width: var(--border-width);\r\n  height: calc(100% - var(--border-width));\r\n\r\n  background-image: linear-gradient(\r\n    var(--vertical-angle),\r\n    #fff9,\r\n    transparent calc(var(--vertical-length) - 2px)\r\n  );\r\n\r\n  clip-path: var(--vertical-clip-path);\r\n}\r\n\r\n/* Horizontal Bottom */\r\n.border-effect > .border:nth-child(3) {\r\n  bottom: 0;\r\n  right: 0;\r\n\r\n  width: 100%;\r\n  height: var(--border-width);\r\n\r\n  background-image: linear-gradient(\r\n    var(--horizontal-reversed-angle),\r\n    #fff9,\r\n    transparent var(--horizontal-length)\r\n  );\r\n\r\n  clip-path: var(--horizontal-clip-path-reversed);\r\n}\r\n\r\n/* Vertical Right */\r\n.border-effect > .border:nth-child(4) {\r\n  bottom: var(--border-width);\r\n  right: 0;\r\n\r\n  width: var(--border-width);\r\n  height: calc(100% - var(--border-width));\r\n\r\n  background-image: linear-gradient(\r\n    var(--vertical-reversed-angle),\r\n    #fff9,\r\n    transparent calc(var(--vertical-length) - 2px)\r\n  );\r\n\r\n  clip-path: var(--vertical-clip-path-reversed);\r\n}\r\n"
 
   const stylesheet = new CSSStyleSheet()
-  stylesheet.replace(css)
+  stylesheet.replaceSync(css)
 
   /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (stylesheet);
   
