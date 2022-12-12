@@ -604,9 +604,7 @@ class SliderInterface {
   constructor(targetComponent, wrapper) {
 
     const stylesheet = targetComponent.shadowRoot.adoptedStyleSheets[0]
-    console.log(stylesheet)
     const rule = [...stylesheet.cssRules].find(rule => rule.selectorText === '.wrapper')
-
 
     Object.defineProperties(this, {
       targetComponent: {enumerable: true, value: targetComponent},
