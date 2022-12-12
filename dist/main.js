@@ -214,7 +214,7 @@ const DOMMaker = new Proxy(function() {}, {
 function buildElement(element, properties = {}, ...children) {
   const {id, class: classes, dataset, attributes, style} = properties
 
-  const tp = trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e })
+  const tp = window.trustedTypes ? trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e }) : {createHTML: e => e, createScriptURL: e => e }
 
   if (id) {
     element.id = id
@@ -365,7 +365,7 @@ const NSMaker = namespace => {
 function buildElementNS(element, properties = {}, ...children) {
   const {id, class: classes, dataset, attributes, style} = properties
 
-  const tp = trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e })
+  const tp = window.trustedTypes ? trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e}) : {createHTML: e => e, createScriptURL: e => e }
 
   if (id) {
     element.id = id
@@ -1014,6 +1014,10 @@ __webpack_require__.r(__webpack_exports__);
   }
 
   function turnStringIntoTrustedHTML(htmlString) {
+    if (!window.trustedTypes) {
+      return htmlString
+    }
+
     const trustedHTMLPolicy = trustedTypes.createPolicy('trustedHTML', {createHTML: string => string})
     return trustedHTMLPolicy.createHTML(htmlString)
   }

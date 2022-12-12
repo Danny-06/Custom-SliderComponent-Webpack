@@ -42,6 +42,10 @@ module.exports = function htmlDocumentFragmentLoader(content, map, meta) {
   }
 
   function turnStringIntoTrustedHTML(htmlString) {
+    if (!window.trustedTypes) {
+      return htmlString
+    }
+
     const trustedHTMLPolicy = trustedTypes.createPolicy('trustedHTML', {createHTML: string => string})
     return trustedHTMLPolicy.createHTML(htmlString)
   }
