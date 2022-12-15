@@ -1,22 +1,21 @@
 {
   "type": "module",
   "name": "slider-components",
-  "description": "Example React project using vanilla-extract and Sprinkles, compiling with webpack",
+  "description": "Webpack project",
   "keywords": [
     "webpack"
   ],
   "version": "0.0.15",
-  "author": "SEEK",
+  "author": "undefined",
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack"
   },
   "private": false,
-  "dependencies": {
-    "webpack": "^5.36.1",
-    "webpack-cli": "^4.6.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "webpack": "^5.36.1",
+    "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^4.11.1"
   }
 }
