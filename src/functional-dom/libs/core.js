@@ -284,7 +284,7 @@ export const NSMaker = namespace => {
  * creating an element it just takes an `element` and applies  
  * the `properties` and the `children` to it.
  */
-function buildElementNS(element, properties = {}, ...children) {
+export function buildElementNS(element, properties = {}, ...children) {
   const {id, class: classes, dataset, attributes, style} = properties
 
   const tp = window.trustedTypes ? trustedTypes.createPolicy('', {createHTML: e => e, createScriptURL: e => e}) : {createHTML: e => e, createScriptURL: e => e }
